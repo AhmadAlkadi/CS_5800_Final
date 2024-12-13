@@ -1,0 +1,21 @@
+@startuml
+
+actor Consumer
+participant ComicBook
+entity SearchComic
+participant Server
+participant FindComicServices
+database ComicDataBase
+
+Consumer -> ComicBook : VisitWebsite
+ComicBook -> SearchComic : ConsumerSearchForComic
+SearchComic -> Server : ComicBookNameString
+Server -> FindComicServices : ComicBookNameString
+FindComicServices -> ComicDataBase : FindComicNameThatMatches
+ComicDataBase -> FindComicServices : ReturnComicBookFoundData
+FindComicServices -> Server : ReturnComicBookFoundData
+Server -> SearchComic : NameOfTheComicBooksThatHaveThanName(List)
+SearchComic -> ComicBook : ViewAllComicsWithName
+ComicBook -> Consumer : CosumerCanSeeTheList
+
+@enduml

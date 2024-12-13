@@ -1,0 +1,72 @@
+@startuml
+start
+
+
+:Open ComicReader;
+
+if( Logged in to an Account? ) then (yes)
+(no) elseif (Create an Account?) then (yes)
+    :Logged in to an Account;
+else (no)
+    end
+endif
+
+:Comic Book Home Page;
+
+repeat :Browse Comics;
+    label startBrowse
+    if(See a comic you like?) then (yes)
+    elseif (Looking for something specific?) then (yes)
+        :Use Search bar;
+    elseif (Looking for a category?) then (yes)
+        :Click category Tab;
+
+        switch (What Category?)
+        case()
+            :Followed Comic Book artists;
+        case()
+            :Recommended;
+        case()
+            :Popular;
+        case()
+            :Explore;
+        endswitch
+    elseif(Looking for a Specific Artist?) then(yes)
+
+        switch(Interact with Channel)
+        case()
+        :Browse Comics 
+        created by artist;
+        case()
+            :Follow Artist;
+        endswitch
+        :Pick a comic from artist;
+    else (no)
+        end
+    endif
+
+    :Read Comic;
+    if(Logged In) then (yes)
+        switch(Interact with Comic)
+        case()
+            :Like;
+        case()
+            :Comment;
+        case()
+            :Share with Other users;
+        case()
+            :Follow Comic;
+        case()
+            :Follow Artist;
+        endswitch
+    else (no)
+    endif
+
+repeat while (Continue Browsing?) is (yes)
+-> no;
+
+
+stop
+
+
+@enduml

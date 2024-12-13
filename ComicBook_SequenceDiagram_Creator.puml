@@ -1,0 +1,22 @@
+@startuml
+
+actor Creator
+participant ComicBook
+entity ComicStatistics
+participant API
+participant StatisticsServices
+database ComicDataBase
+
+Creator -> ComicBook : VisitWebsite
+ComicBook -> ComicStatistics : ProducerCheckStatistics
+ComicStatistics -> Server : ComicBookNameString
+Server -> StatisticsServices : ComicBookNameString
+StatisticsServices -> ComicDataBase : FindComicNameThatMatches
+ComicDataBase -> StatisticsServices : ReturnStatisticsOfComic
+StatisticsServices -> Server : ReturnStatisticsOfComic
+Server -> ComicStatistics : StatisticsOfComic(Chart)
+ComicStatistics -> ComicBook : OverviewOfStastisticsOfComic
+ComicBook -> Creator : ProducerCanSeeStatisticsOfComic
+
+@enduml
+

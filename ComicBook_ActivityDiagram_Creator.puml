@@ -1,0 +1,51 @@
+@startuml
+:Open ComicReader;
+
+if( Logged in to Google? ) then (yes)
+else (no)
+    :Must login to access
+    account Creator pages;
+    end
+endif
+
+:If Verified grant access;
+switch(Browsing ComicReader)
+case()
+    :Browse as a Consumer;
+    stop
+case()
+    :Go to Creator Page;
+endswitch
+
+repeat :Creator Page;
+
+    switch(Interact with Comics)
+    case()
+        :Create New Comic;
+        :Upload Comic Book file;
+        :Review Mode;
+        :Confirm;
+    case()
+        switch(Modify Existing Comic)
+        case()
+            :Change Main Comic Picture;
+        case()
+            :Modify Comic page;
+        case()
+            :Add new chapter to comic page;
+        case()
+            :Delete Comic;
+        endswitch
+
+    case()
+        :Check Statistics of Comics;
+    endswitch
+
+repeat while (Done?) is (no)
+-> yes;
+stop
+
+
+
+
+@enduml

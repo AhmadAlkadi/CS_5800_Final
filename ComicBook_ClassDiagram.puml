@@ -1,0 +1,372 @@
+@startuml
+
+abstract User{
+    #String userId
+    #String userName
+    #String password
+    #String email
+    #String dateOfBirth
+    #int FollowCount
+    #bool verified
+
+    +void logIn()
+    +void logOut()
+    +void checkForAuthentication()
+    +void setUserName()
+    +void setPassword()
+    +void setEmail() 
+    +void setDateOfBirth()
+    +void setFollowCount()
+    +String getUserID()
+    +String getUserName()
+    +String getPassword()
+    +String getEmail()
+    +String getDateOfBirth()
+    +int getFollowCount()
+}
+
+class Authentication{
+    -bool verified
+    +bool IsUserVerified()
+}
+
+abstract class Comic{
+    -String comicName
+    -String comicID
+    -String comicDiscription
+    -String category
+    -int chapters
+    -int pages
+
+    +void getComicName()
+    +void getComicID()
+    +void getChapters()
+    +void getPages()
+    +void getDiscription()
+    +String setComicName()
+    +String setComicID()
+    +String setDiscription()
+    +int setChapters()
+    +int setPages()
+    +void comicBookCategory()
+}
+
+Interface ComicState{
+    -Comic comic
+    
+    +void nextPage()
+    +void previousPage()
+    +void nextChapter()
+    +void previousChapter()
+}
+
+class NextPage{
+    -Comic comic
+
+    +void nextPage()
+    +void previousPage()
+    +void nextChapter()
+    +void previousChapter()
+}
+
+class PreviousPage{
+    -Comic comic
+
+    +void nextPage()
+    +void previousPage()
+    +void nextChapter()
+    +void previousChapter()
+}
+
+class NextChapter{
+    -Comic comic
+
+    +void nextPage()
+    +void previousPage()
+    +void nextChapter()
+    +void previousChapter()
+}
+
+class PreviousChapter{
+    -Comic comic
+
+    +void nextPage()
+    +void previousPage()
+    +void nextChapter()
+    +void previousChapter()
+}
+
+class Follow{
+    -String artistName
+    
+    +void getArtistNameToFollow()
+}
+
+class Server{
+    -String userID
+    -User type
+    -String comicID
+
+    +void requestAuthentication()
+    +void requestComicName()
+    +void requestFollowArtist()
+    +void requestArtistName()
+    +void requestComicStatistics()
+}
+
+
+struct UserDB{
+    +String userId
+    +String userName
+    +String password
+    +String email
+    +String dateOfBirth
+    +int FollowCount
+    +bool verified
+    +List followList
+}
+
+struct ComicDB{
+    +String comicName
+    +String comicID
+    +String discription
+    +int chapters
+    +int pages
+    +String category
+    +double statistics
+    
+}
+
+class Consumer{
+    -List artistFollowList
+
+    +void getListOfFllowedArtists()
+}
+
+class Creator{
+    -List comicsMadeByCreator
+
+    +void getComicList()
+}
+
+class SearchArtist{
+    -String artistName
+
+    +void getArtistSearchName()
+}
+
+class FindCategory{
+    -String category
+
+    +void getCategory()
+}   
+
+class SerachComic{
+    -String comicName
+
+    +void getComicSearchName()
+}
+
+class FindUser{
+    -String userName
+    -String userID
+
+    +void getUserName()
+    +void getUserID()
+    +String setUserID()
+    +String setUserName()
+}
+
+class FindComic{
+    -String comicName
+    
+    +void getComicName()
+    +String setComicName()
+}
+
+class CreateComic{
+    -String comicName
+
+    +void getComicName()
+}
+
+class ComicStatistics{
+    -String comicName
+
+    +void getComicName()
+}
+
+class ModifyComic{
+    -String comicName
+
+    +void getComicName()
+}
+
+class FollowServices{
+    -int follow
+    
+    +void getFollowCount()
+    +int setFollowCount()
+    +void countIncrease()
+}
+
+class ModifyServices{
+    -String comicName
+    
+    +void getComicName()
+    +String setComicName()
+}
+
+class CreateServices{
+    -String comicName
+    -String comicID
+    -int chapters
+    -int pages
+    
+    +String setComicName()
+    +String setComicID()
+    +int setComicPage()
+    +int setComicChapter()
+}
+
+class StatisticsServices{
+    -double statistics
+
+    +void getStatistics()
+}
+
+Interface ComicBuilder{
+    -String comicName
+    -String comicDiscription
+    -int chapters
+    -int pages
+
+    +void getComicName()
+    +void getChapters()
+    +void getPages()
+    +void getDiscription()
+    +String setComicName()
+    +String setDiscription()
+    +int setChapters()
+    +int setPages()
+} 
+
+class ComicChapter{
+    -int chapters
+    
+    +void getChapters()
+    +int setChapters()
+}
+
+class PagesPerChapter{
+    -int pages
+
+    +void getPages()
+    +int setPages()
+}
+
+class ComicName{
+    -String comicName
+
+    +void getComicName()
+    +String setComicName()
+}
+
+class ComicDescription{
+    -String comicDiscription
+
+    +void getDiscription()
+    +String setDiscription()
+}
+
+class HorrorComic{
+    -String category
+
+    +void comicBookCategory()
+}
+
+class SuperHeroComic{
+    -String category
+
+    +void comicBookCategory()
+}
+
+class SienceFictionComic{
+    -String category
+
+    +void comicBookCategory()
+}
+
+class ComedyComic{
+    -String category
+
+    +void comicBookCategory()
+}
+
+class Category{
+    -String category
+    
+    +void getCategory()
+}
+
+Comic <|-- HorrorComic
+Comic <|-- SuperHeroComic
+Comic <|-- SienceFictionComic
+Comic <|-- ComedyComic
+
+ComicBuilder --* Comic
+ComicBuilder *-- ComicChapter
+ComicBuilder *-- PagesPerChapter
+ComicBuilder *-- ComicName
+ComicBuilder *-- ComicDescription
+
+Consumer --o SearchArtist
+Consumer --o SerachComic
+Consumer --o Follow
+Consumer --o Category
+Category <--> Server
+Follow <--> Server
+SearchArtist <--> Server
+SerachComic <--> Server
+Server <--> FindUser
+Server <--> FindComic
+Server <--> FollowServices
+FollowServices <--> UserDB
+UserDB <--> FindUser
+ComicDB <--> FindComic
+
+Creator --o CreateComic
+Creator --o ComicStatistics
+Creator --o ModifyComic
+Server <---> CreateComic
+Server <---> ComicStatistics
+Server <---> ModifyComic
+Server <--> ModifyServices
+Server <--> CreateServices
+Server <--> StatisticsServices
+Server <--> FindCategory
+ComicDB <--> FindCategory
+ComicDB <--> ModifyServices
+ComicDB <--> CreateServices
+ComicDB <--> StatisticsServices
+
+Comic *--- ComicState
+ComicState <-- NextPage
+ComicState <-- PreviousPage
+ComicState <-- NextChapter
+ComicState <-- PreviousChapter
+
+User <-- Creator
+User <-- Consumer
+
+Comic o-- Consumer
+Comic o--o Creator
+
+User "1"--"1" Authentication
+
+Authentication <-> Server
+Comic <-> Server
+
+
+
+@enduml
